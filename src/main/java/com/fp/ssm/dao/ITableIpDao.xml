@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.fp.ssm.dao.ITableIpDao">
+
+	<select id="getRowCount" resultType="int">
+		select count(*) from table_ip
+	</select>
+	
+	<select id="selectByParams" resultType="com.fp.ssm.po.TableIpEx" parameterType="com.fp.ssm.po.TableIpShowVo">
+		select * from table_ip  
+		order by findTime desc
+		limit ${offset}, ${size}
+	</select>
+	
+	<select id="fetchByParams" resultType="com.fp.ssm.po.TableIp" parameterType="map">
+		select * from table_ip
+		where 1=1
+		<if test="country != null and country != ''">
+			and country = '${country}'
+		</if>
+		<if test="isp != null and isp != ''">
+			and isp = '${isp}'
+		</if>
+		limit ${size}
+	</select>
+	
+</mapper> 

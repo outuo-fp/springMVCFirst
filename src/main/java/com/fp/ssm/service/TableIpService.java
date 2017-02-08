@@ -41,7 +41,7 @@ public class TableIpService {
 		return ipList;
 	}
 
-	public String printIp(String number, String country, String isp) {
+	public String findIp(String number, String country, String isp) {
 		int size = 100;
 		try {
 			size = Integer.parseInt(number);

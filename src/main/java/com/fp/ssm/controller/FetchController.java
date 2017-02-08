@@ -32,7 +32,7 @@ public class FetchController {
 		String country = request.getParameter("country");
 		String isp = request.getParameter("isp");
 		
-		String txt = service.printIp(number, country, isp);
+		String txt = service.findIp(number, country, isp);
 		
 		PrintWriter writer;
 		try {

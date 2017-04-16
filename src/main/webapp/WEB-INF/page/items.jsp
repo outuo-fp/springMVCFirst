@@ -14,7 +14,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>信息管理系统</title>
 <link rel="stylesheet" type="text/css" href="css/index.min.css">
-
+<link rel="stylesheet" type="text/css" href="css/select.css">
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript">
    
@@ -72,7 +72,7 @@
 </head>
 <body>
 
-	<!-- head class="wrap header"-->
+	<!-- head -->
 	<div id="page-header" class="wrap header">
 		<header id="masthead" class="site-header" role="banner">
 			 <div class="hgroup">
@@ -93,13 +93,13 @@
 				<h3 class="menu-toggle">Menu</h3>
 				<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
 				<ul class="nav-menu">
-					<li id="menu_index" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item">
+					<li id="menu_index" class="menu-item menu-item-type-custom menu-item-object-custom">
 						<a href="index.html">项目管理</a>
 					</li>
 					<li id="menu_api" class="menu-item menu-item-type-taxonomy menu-item-object-custom ">
 						<a href="task.html">任务派发</a>
 					</li>
-					<li id="menu_help" class="menu-item menu-item-type-taxonomy menu-item-object-custom">
+					<li id="menu_help" class="menu-item menu-item-type-taxonomy menu-item-object-custom current-menu-item">
 						<a href="items.html">物料清单</a>
 					</li>
 					<li style="margin-right: 10px;" class="menu-item menu-item-type-taxonomy menu-item-object-custom right"><i class="qq-icon" style="cursor: pointer;" onclick="window.open('http://jq.qq.com/?_wv=1027&amp;k=VFVEFs','_blank')"></i>QQ群：66782959 </li>
@@ -155,35 +155,38 @@
 						<thead>
 							<tr>
 							    <th>id</th>
-								<th>负责人</th>
 								<th>项目名称</th>
-								<th>数量</th>
-								<th>金额</th>
-								<th>部门</th>
-								<th>联系人</th>
+								<th>部件</th>
+								<th>型号</th>
+								<th>品牌</th>
+								<th>单价</th>
+								<th>数量</th>					
 								<th>剩余时间</th>
-								<th>交货时间</th>
+								<th>计划交货</th>
+								<th>实际交货</th>
 								<th>状态</th>
+								<th>备注</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody id='tr1' >
 							
-							<c:forEach items="${tbList }" var="items" >
-							<tr id="list${items.id }" >
-							    <td>${items.id }</td>
-								<td>${items.ip }</td>
-								<td>${items.port }</td>
-								<td>${items.country }</td>
-								<td>${items.province } ${items.city }</td>
-								<td>${items.isp }</td>
-								<td>${items.findTime }</td>
+							<tr id="list1" >
+							    <td>进行中</td>
+								<td>进行中苏打水SF的酚AF分</td>
 								<td>进行中</td>
 								<td>进行中</td>
 								<td>进行中</td>
-								<td style="font-weight:bold" id =${items.id }><a href="#">查看</a> | <a href="#">删除</a> | <a id='' href="javascript:;" onclick ="change(${items.id})">编辑</a></td>
+								<td>进行中</td>
+								<td>进行中</td>
+								<td><a style ='strong' href="https://www.baidu.com/">链接</a></td>
+								<td>进行中</td>
+								<td>进行中</td>
+								<td>进行中</td>
+								<td>进行中但是故事的故事的故事</td>
+								<td style="font-weight:bold" id =1><a href="#">查看</a> | <a href="#">删除</a> | <a id='' href="javascript:;" onclick ="change(1)">编辑</a></td>
 							</tr>							
-							</c:forEach>
+							
 
 						</tbody>
 					</table>
@@ -193,32 +196,7 @@
 					
 					<div class="wp-pagenavi">
 						<span>第</span>
-					<%-- 	<%
-						
-							PageParam pageParam = (PageParam)request.getAttribute("pageParam");
-							int currPage = pageParam.getCurrPage();
-							int totalPage = pageParam.getTotalPage();
-							for(int i = 1; i <= totalPage; i ++){
-								if(i == currPage){
-									%><span class="current"><%=currPage %></span><%
-								}else{
-									%><a href="index.html?page=<%=i %>"><%=i %></a><%
-								}
-							}
-						%> --%>
-						<%
-						
-							PageParam pageParam = (PageParam)request.getAttribute("pageParam");
-							int currPage = pageParam.getCurrPage();
-							int totalPage = pageParam.getTotalPage();
-							for(int i = 1; i <= totalPage; i ++){
-								if(i == currPage){
-									%><span class="current">${pageParam.currPage }</span><%
-								}else{
-									%><a href="index.html?page=<%=i %>"><%=i %></a><%
-								}
-							}
-						%>
+					
 						<span>页</span>
 					</div>
 				</div>

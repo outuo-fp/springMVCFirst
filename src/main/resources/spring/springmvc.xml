@@ -11,6 +11,41 @@
 	-->
     <context:component-scan base-package="com.fp.ssm.*" />
 
+	<!--注解映射器 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/> -->
+	<!--注解适配器 -->
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/> -->
+	
+	<!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置
+	mvc:annotation-driven默认加载很多的参数绑定方法，
+	比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter
+	实际开发时使用mvc:annotation-driven
+	 -->
+	<!-- <mvc:annotation-driven conversion-service="conversionService"
+	validator="validator"></mvc:annotation-driven> -->
+	
+<mvc:annotation-driven >
+	<mvc:message-converters>  
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">  
+                <property name="supportedMediaTypes">  
+                    <list>  
+                        <value>text/plain;charset=UTF-8</value>  
+                        <value>text/html;charset=UTF-8</value>  
+                    </list>  
+                </property>  
+            </bean>  
+            <bean  
+                class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+                <property name="supportedMediaTypes">  
+                    <list>  
+                        <value>application/json;charset=UTF-8</value>  
+                        <value>application/x-www-form-urlencoded; charset=UTF-8</value>  
+                    </list>  
+                </property>  
+            </bean>  
+        </mvc:message-converters>  
+	</mvc:annotation-driven>
+	
     <!-- 
     	模型解析，在请求时为模型视图名称添加前后缀 
     	比如在controller类中需要请求/WEB-INF/page/index.jsp文件，直接写index就可以了

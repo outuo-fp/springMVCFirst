@@ -7,6 +7,10 @@
 		select count(*) from table_ip
 	</select>
 	
+	<select id="findById" resultType="com.fp.ssm.po.TableIpEx" parameterType="Integer">
+		select * from table_ip where id = #{id }
+	</select>
+	
 	<select id="selectByParams" resultType="com.fp.ssm.po.TableIpEx" parameterType="com.fp.ssm.po.TableIpShowVo">
 		select * from table_ip  
 		order by findTime desc

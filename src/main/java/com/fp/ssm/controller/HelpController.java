@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HelpController {
 
-	@RequestMapping(value = "help")
+	@RequestMapping(value = "items")
 	public String helloWorld(){
-		return "help";
+		return "items";
 	}
 	
 }

@@ -13,14 +13,11 @@ line-height: 1.7;
 padding: 0;
 border: 0 none;
 }
+
 .header {
-width: 96%;
-max-width: 1128px;
-}
-.header {
-max-width: 1130px;
+max-width: 1336px;
 overflow: hidden;
-border: 1px solid #fff;
+border: 10px solid #fff;
 }
 .site-header {
 vertical-align: baseline;
@@ -60,13 +57,13 @@ color: #fff;
 line-height: 34px;
 background-color: #222;
 margin: 0 auto;
-max-width: 1128px;
+max-width: 1336px;
 font-weight: bold;
 font-family: Verdana,Arial,Helvetica,sans-serif;
 box-shadow: 1px 2px 5px 1px #808080;
 }
 .wrap {
-max-width: 1128px;
+max-width: 1336px;
 margin: 0 auto;
 background: #fff;
 }
@@ -125,16 +122,16 @@ float: right;
 }
 /*************/
 .fullwidth {
-max-width: 1128px;
+max-width: 1336px;
 overflow: hidden;
-width: 96%;
+width: 100%;
 }
 .fullwidth {
-max-width: 1128px;
+max-width: 1336px;
 border: 1px solid #eaeaea;
-margin-bottom: 10px;
+margin-bottom: 15px;
 background: #fff;
-margin-top: 15px;
+margin-top: 10px;
 }
 #content {
 background: #fff;

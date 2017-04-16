@@ -14,65 +14,40 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>信息管理系统</title>
 <link rel="stylesheet" type="text/css" href="css/index.min.css">
-
+<link rel="stylesheet" type="text/css" href="css/select.css">
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript">
    
-   function change(obj)
-   {
-       var test= '#list' + obj;
-       var test1 = "${tbList[1].ip }";
-       var user = {"tableIp.id":obj};
-	   //alert(${tbList[obj].ip });
-	  //alert(test );
-	  
-	    $.ajax({
-	    	type:"post",
-	    	url:"${pageContext.request.contextPath }/find.shtml",
-	    	data:user,
-	    	success:function(data)
-	    	{
-	    		var parseJson = $.parseJSON(data);
-	    		alert(parseJson.findTime);
-	    	
-	    		var ipvar = '<td><input type="text" style="width:80px;" name="fname" value ='+parseJson.ip+' /></td>';
-	    		var iportvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.port+' /></td>';
-	    		var countryvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.country+' /></td>';
-	    		var cityvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.country+' '+parseJson.city+' /></td>';
-	    		var ispvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.isp+' /></td>';
-	    		var findtimevar = '<td><input type="text" style="width:100px;" name="fname" value ='+parseJson.findTime+' /></td>';
-				
-				var clickvar='<td ><a href="#">返回</a> | <a href="javascript:;" onclick ="save('+obj+')">保存</a></td>'
-	    		
-	    		var html = '<td>'+ obj+'</td>'+ipvar+iportvar+countryvar+cityvar+ispvar+findtimevar+'<td>完成</td>'+clickvar;
-	    		$(test).empty();
-	    		$(test).append(html);
-	    	//alert(data);
-	    	},
-	    	error: function(textStatus){ 
-	    		alert(textStatus);
-              return;  
-       		 }  
-	    });
-	    
-	    
-   }
+  
+	function change(obj) {
+		//alert(obj.parentNode.parentNode.id)
+		//var html = '<input name="itemsCustom.name" value="hello" />';
+		/*    $.post("find.html",
+			    {
+			      id:7
+			    },
+			    function(data,status){
+			      alert("数据：" + data + "\n状态：" + status);
+			    }); */
+	    var html = '<td >${tableIpEx.id }</td><td >${tableIpEx.id }</td><td>${tableIpEx.id }</td><td>编辑</td><td>编辑</td><td>编辑</td><td>编辑</td><td>进行中</td><td style="font-weight:bold">编辑</td>';
+		$('#1').html(html);    
+	}
 
-    $(function () {
-      var data = ["a", "b", "c", "d"];
-      var html = '<td>${items.id }</td><td></td><td></td><td></td><td></td><td></td><td></td><td>进行中</td><td>完成</td>';
-      /* for (var i = 0; i < data.length; i ++) {
-        html += "<td>" + data[i] + "</td>";
-      } */
-      $("#row").empty();
-      $("#row").append(html);
-      
-    });
-  </script>
+	$(function() {
+		var data = [ "a", "b", "c", "d" ];
+		var html = '<input name="itemsCustom.name" value="hello" />';
+		/* for (var i = 0; i < data.length; i ++) {
+		  html += "<td>" + data[i] + "</td>";
+		} */
+		$("#row").empty();
+		$("#row").append(html);
+
+	});
+</script>
 </head>
 <body>
 
-	<!-- head class="wrap header"-->
+	<!-- head -->
 	<div id="page-header" class="wrap header">
 		<header id="masthead" class="site-header" role="banner">
 			 <div class="hgroup">
@@ -97,10 +72,10 @@
 						<a href="index.html">项目管理</a>
 					</li>
 					<li id="menu_api" class="menu-item menu-item-type-taxonomy menu-item-object-custom ">
-						<a href="task.html">任务派发</a>
+						<a href="fetch.html">物料管理</a>
 					</li>
 					<li id="menu_help" class="menu-item menu-item-type-taxonomy menu-item-object-custom">
-						<a href="items.html">物料清单</a>
+						<a href="help.html">帮助中心</a>
 					</li>
 					<li style="margin-right: 10px;" class="menu-item menu-item-type-taxonomy menu-item-object-custom right"><i class="qq-icon" style="cursor: pointer;" onclick="window.open('http://jq.qq.com/?_wv=1027&amp;k=VFVEFs','_blank')"></i>QQ群：66782959 </li>
 				</ul>
@@ -157,33 +132,27 @@
 							    <th>id</th>
 								<th>负责人</th>
 								<th>项目名称</th>
-								<th>数量</th>
-								<th>金额</th>
-								<th>部门</th>
-								<th>联系人</th>
-								<th>剩余时间</th>
-								<th>交货时间</th>
+								<th>国家</th>
+								<th>省市</th>
+								<th>运营商</th>
+								<th>创建时间</th>
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
 						</thead>
-						<tbody id='tr1' >
-							
-							<c:forEach items="${tbList }" var="items" >
-							<tr id="list${items.id }" >
-							    <td>${items.id }</td>
-								<td>${items.ip }</td>
-								<td>${items.port }</td>
-								<td>${items.country }</td>
-								<td>${items.province } ${items.city }</td>
-								<td>${items.isp }</td>
-								<td>${items.findTime }</td>
+						<tbody id='tr1'>
+							<tr id="${tableIpEx.id }">
+							    <td >${tableIpEx.id }</td>
+								<td >${tableIpEx.ip }</td>
+								<td>${tableIpEx.port }</td>
+								<td>${tableIpEx.country }</td>
+								<td>${tableIpEx.province } ${tableIpEx.city }</td>
+								<td>${tableIpEx.isp }</td>
+								<td>${tableIpEx.findTime }</td>
 								<td>进行中</td>
-								<td>进行中</td>
-								<td>进行中</td>
-								<td style="font-weight:bold" id =${items.id }><a href="#">查看</a> | <a href="#">删除</a> | <a id='' href="javascript:;" onclick ="change(${items.id})">编辑</a></td>
+								<td style="font-weight:bold"><a href="#">查看</a> | <a href="#">删除</a> | <a href="javascript:;" onclick ="change(this)">编辑</a></td>
 							</tr>							
-							</c:forEach>
+							
 
 						</tbody>
 					</table>
@@ -191,36 +160,7 @@
 
 					<div class="message" id="row">注：表中响应速度是中国测速服务器的测试数据，仅供参考。响应速度根据你机器所在的地理位置不同而有差异。</div>
 					
-					<div class="wp-pagenavi">
-						<span>第</span>
-					<%-- 	<%
-						
-							PageParam pageParam = (PageParam)request.getAttribute("pageParam");
-							int currPage = pageParam.getCurrPage();
-							int totalPage = pageParam.getTotalPage();
-							for(int i = 1; i <= totalPage; i ++){
-								if(i == currPage){
-									%><span class="current"><%=currPage %></span><%
-								}else{
-									%><a href="index.html?page=<%=i %>"><%=i %></a><%
-								}
-							}
-						%> --%>
-						<%
-						
-							PageParam pageParam = (PageParam)request.getAttribute("pageParam");
-							int currPage = pageParam.getCurrPage();
-							int totalPage = pageParam.getTotalPage();
-							for(int i = 1; i <= totalPage; i ++){
-								if(i == currPage){
-									%><span class="current">${pageParam.currPage }</span><%
-								}else{
-									%><a href="index.html?page=<%=i %>"><%=i %></a><%
-								}
-							}
-						%>
-						<span>页</span>
-					</div>
+					
 				</div>
 			</div>
 		 </div> 

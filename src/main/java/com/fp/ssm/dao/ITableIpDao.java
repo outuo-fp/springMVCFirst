@@ -19,5 +19,7 @@ public interface ITableIpDao {
 	public List<TableIpEx> selectByParams(TableIpShowVo tableipvo) ;
 
 	public List<TableIp> fetchByParams(Map<String, Object> params) ;
+	
+	public TableIpEx findById(Integer id) ;
 
 }

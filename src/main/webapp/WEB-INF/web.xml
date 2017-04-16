@@ -33,6 +33,12 @@
     <url-pattern>*.html</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+  	  <!-- 指定请求的后缀，可以随意写，这里用.shtml作为请求后缀 -->
+    <servlet-name>Dispatcher</servlet-name>
+    <url-pattern>*.shtml</url-pattern>
+  </servlet-mapping>
+  
   <!-- 编码格式为UTF-8 -->
   <filter>
       <filter-name>encodingFilter</filter-name>

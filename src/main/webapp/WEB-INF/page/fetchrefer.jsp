@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>代理IP提取系统 帮助中心</title>
 <link rel="stylesheet" type="text/css" href="css/index.min.css">
+
 </head>
 <body>
 
@@ -98,7 +99,7 @@
 	<div id="footer">
 			<div class="copyright">
 				<span class="footerleft">友情链接：
-				<a href="http://www.qiaodm.com/" target="_blank" title="敲代码，IT技术任你学">敲代码</a>
+				<a href="http://www.baidu.com/" target="_blank" title="敲代码，IT技术任你学">敲代码</a>
 				<a href="http://ip.qiaodm.com/" target="_blank" title="敲代码免费代理IP">敲代码免费代理IP</a>
 				<a href="http://proxy.goubanjia.com/" target="_blank" title="敲代码免费代理IP">全网代理IP</a>
 				<a href="http://wantsee.cn" target="_blank" title="">想看就看</a>

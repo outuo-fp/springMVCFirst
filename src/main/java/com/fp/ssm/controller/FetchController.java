@@ -21,9 +21,9 @@ public class FetchController {
 	@Resource
 	TableIpService service;
 	
-	@RequestMapping(value = "fetch")
+	@RequestMapping(value = "task")
 	public String helloWorld(){
-		return "fetch";
+		return "task";
 	}
 
 	@RequestMapping(value = "get", method = RequestMethod.POST)

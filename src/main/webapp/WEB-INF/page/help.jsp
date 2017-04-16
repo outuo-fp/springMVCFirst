@@ -49,63 +49,142 @@
 	</div>
 
 <!-- body -->
-<div class="wrap fullwidth">
-	<div id="content" style="width: auto;">
-		<div id="breadcrumbs">
-			<a href="index.html">首页</a>»»&nbsp; 帮助中心
-		</div>
-		<div id="post-2" class="post-2 page type-page status-publish hentry">
-			<div class="entry entry-content">
-				<div class="questions">
-					<div class="line">
-						<h3>1. 在哪里购买？我想先测试一下怎么办？</h3>
-						<div class="answer">
-						您可以购买包天试用，支付宝担保支付，我们支持<span class="warn">24小时全额退款</span>。
-						</div>
-					</div>
-					<div class="line" id="q_wd">
-						<h3>2. 代理IP稳定吗？能用多久？</h3>
-						<div class="answer">
-						我们提供的代理ip实效性较强，有效期在<span class="warn">几分钟到几个小时</span>不等。<br>
-						可适用于隐藏网页IP，一般常用于空间留言、论坛顶帖、发帖、帐号注册、刷单、刷网站流量、网赚任务等，最适合需要频繁更换IP的客户！
-						</div>
-					</div>
-					<div class="line">
-						<h3>3. 一天有多少量？我购买后提取数量有限制吗？</h3>
-						<div class="answer">
-						目前每天累计可用ip大约 <span class="warn"> 5万个 </span>。订单有效期内是<span class="warn"> 不限量提取 </span>的。
-						</div>
-					</div>
-					<div class="line" id="q_live">
-						<h3>4. 什么是代理的存活率？</h3>
-						<div class="answer">
-						存活率是指代理IP从发现到现在时间的存货周期，存活率越大代表代理IP越稳定。<br>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="clear"></div>
-		</div>
-	</div>
-	<div class="clear"></div>
-	<div id="footer">
-			<div class="copyright">
-				<span class="footerleft">友情链接：
-				<a href="http://www.qiaodm.com/" target="_blank" title="敲代码，IT技术任你学">敲代码</a>
-				<a href="http://ip.qiaodm.com/" target="_blank" title="敲代码免费代理IP">敲代码免费代理IP</a>
-				<a href="http://proxy.goubanjia.com/" target="_blank" title="敲代码免费代理IP">全网代理IP</a>
-				<a href="http://wantsee.cn" target="_blank" title="">想看就看</a>
-				<a href="http://www.66ip.cn/index.html" target="_blank" title="">66代理</a>
-			</span>
-			<div class="clear"></div>
-		</div>
-		<div class="copyright" style="display: none;">
-			<span class="footerleft">Copyright © 2015</span>
-			<span class="footerright">All rights reserved</span>
-			<div class="clear"></div>
-		</div>
-	</div>
-</div>
+<div class="entry entry-content">
+        <h3 class="replace_title">代填申请快递</h3>
+        <table class="table">
+            <tr>
+                <td colspan="6" class="head">申请人信息</td>
+
+            </tr>
+            <tr>
+                <td class="first">申请人：</td>
+                <td class="input"><input type="text" name="name" value=" " /></td>
+                <td class="first">部门：</td>
+                <td class="input"><input type="text" name="name" value=" " /></td>
+                <td class="first">手机：</td>
+                <td class="input"><input type="text" name="name" value=" " /></td>
+            </tr>
+            <tr>
+                <td class="first" >代填人：</td>
+                <td class="input" colspan="5"><input type="text" name="name" value=" " /></td>
+            </tr>
+            <tr>
+                <td colspan="6" class="head">收件人信息</td>
+
+            </tr>
+            <tr>
+                <td class="first">收件人<span class="xing">*</span>：</td>
+                <td class="input"><input type="text" name="name" value=" " /></td>
+                <td class="first">手机<span class="xing">*</span>：</td>
+                <td class="input" colspan="4"><input type="text" name="name" value=" " /></td>
+            </tr>
+            <tr>
+                <td colspan="6" class="head">快递信息</td>
+
+            </tr>
+            <tr>
+                <td class="first">快递区域<span class="xing">*</span>：</td>
+                <td class="input">
+                    <select class="replace_range">
+                        <option value="value">请选择</option>
+                        <option class="replace_civil">国内</option>
+                        <option class="replace_abroad">国外</option>
+                    </select>
+                    <select class="replace_proaddr">
+                        <option>请选择</option>
+                        <option>北京</option>
+                        <option>天津</option>
+                        <option>上海</option>
+                        <option>广州</option>
+                        <option>福建</option>
+                        <option>山东</option>
+                        <option>辽宁</option>
+                        <option>山西</option>
+                        <option>河南</option>
+                        <option>河北</option>
+                        <option>黑龙江</option>
+                        <option>大连</option>
+                    </select>
+                    <select class="replace_counaddr">
+                        <option>请选择</option>
+                        <option>美国</option>
+                        <option>法国</option>
+                        <option>英国</option>
+                        <option>日本</option>
+                        <option>俄国</option>
+                        <option>墨西哥</option>
+                        <option>巴黎</option>
+                        <option>韩国</option>
+                    </select>
+                </td>
+                <td class="first">快递类型<span class="xing">*</span>：</td>
+                <td class="input">
+                    <select>
+                        <option value="value">请选择</option>
+                        <option value="value">文件</option>
+                        <option value="value">其他</option>
+                    </select>
+                </td>
+                <td class="first">快递公司<span class="xing">*</span>：</td>
+                <td class="input">
+                    <select>
+                        <option value="value">请选择</option>
+                        <option value="value">EMS</option>
+                        <option value="value">顺丰</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="first">邮编<span class="xing">*</span>：</td>
+                <td class="input"><input type="text" name="name" value=" " /></td>
+                <td class="first">邮寄地址<span class="xing">*</span>：</td>
+                <td colspan="4" class="input"><input class="addr" type="text" name="name" value=" " /></td>
+
+            </tr>
+            <tr>
+                <td colspan="6" class="head">申请说明</td>
+            </tr>
+            <tr>
+                <td class="secend" style="height:60px;" colspan="6">
+                    <textarea rows="4" cols="131" style="resize:none;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" class="head">备注</td>
+            </tr>
+            <tr>
+                <td class="secend" style="height:60px;" colspan="6">
+                    <textarea rows="4" cols="131" style="resize:none;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" style="height:40px;">
+                    <a href="javascript:;" class="easyui-linkbutton c1" style="width:50px;">提交</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        $(function () {
+            $(".replace_proaddr").hide();
+            $(".replace_counaddr").hide();
+            1
+        })
+        $(".replace_range").change(function () {
+            var name = $(this).val();
+            console.log(name);
+            if (name == "国内") {
+                $(".replace_proaddr").show();
+                $(".replace_counaddr").hide();
+            } else if (name == "国外") {
+                $(".replace_proaddr").hide();
+                $(".replace_counaddr").show();
+            } else if (name == "请选择") {
+                $(".replace_proaddr").hide();
+                $(".replace_counaddr").hide();
+            }
+        })
+    </script>
 
 
 </body>

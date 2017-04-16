@@ -62,6 +62,11 @@ public class TableIpService {
 		return sBuilder.toString();
 	}
 
+	public TableIpEx findTest(Integer id)
+	{
+		TableIpEx tableIpEx =dao.findById(id);
+		return tableIpEx;
+	}
 
 }
 

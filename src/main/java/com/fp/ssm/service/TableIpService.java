@@ -6,9 +6,11 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+
 import org.springframework.stereotype.Service;
 
 import com.fp.ssm.dao.ITableIpDao;
+import com.fp.ssm.po.RoleResourcePo;
 import com.fp.ssm.po.TableIp;
 import com.fp.ssm.po.TableIpEx;
 import com.fp.ssm.po.TableIpShowVo;
@@ -20,6 +22,7 @@ public class TableIpService {
 
 	@Resource
 	ITableIpDao dao ;
+	RoleResourcePo rPo;
 	
 	public int getRowCount() {
 		return dao.getRowCount();
@@ -67,6 +70,66 @@ public class TableIpService {
 		TableIpEx tableIpEx =dao.findById(id);
 		return tableIpEx;
 	}
+	public TableIpEx findById(Integer id){
+		
+		return dao.findById(id);
+	}
+/**
+ * 更新数据方法
+ */
+	public boolean update(TableIp tableIp){
+		
+		return dao.update(tableIp);
+	} 
+	/**
+	 * 
+	 * 添加用户信息
+	 * 方法名：insert
+	 * @param tableIp
+	 * @return String
+	 * @exception
+	 */
+	 public String insert(TableIp tableIp){
+		 int i = dao.insert(tableIp);
+		 String message = "";
+		 if(i>0){
+			 message ="添加失败";
+		 }else{
+			 message ="添加成功";
+		 }
+		 return message;
+	 }
+	 public String delete(int id){
+		 int i = dao.delete(id);
+		 String message = "";
+		 if(i>0){
+			 message ="删除失败";
+		 }else{
+			 message ="删除成功";
+		 }
+		 return message;
+	 }
+	
+	/*public List<TableIp> getSelect(RoleResourcePo rPo){
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		params.put("item", rPo.getItem());
+		List<TableIp> list =dao.selectByLike(params);
+		
+		return list;
+	} */ 
+	 /**
+	  * 
+	  * 实现模糊查询
+	  * 方法名：getselect
+	  * @param map
+	  * @return List<Map>
+	  * @exception
+	  */
+	 public List<TableIp> getselect(RoleResourcePo rPo) { 
+		 System.out.println(rPo.getItem());
+	        List<TableIp> selectUser = dao.selectByLike(rPo);  
+	        return selectUser;  
+	    }  
 
 }
-

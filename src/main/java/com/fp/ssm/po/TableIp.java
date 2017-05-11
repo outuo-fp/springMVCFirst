@@ -35,7 +35,7 @@ public class TableIp {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-
+	
 	public String getPort() {
 		return port;
 	}
@@ -81,6 +81,23 @@ public class TableIp {
 	}
 
 	public void setFindTime(Date findTime) {
+		this.findTime = findTime;
+	}
+	
+	public TableIp() {
+		super();
+	}
+
+	public TableIp(int id, String ip, String port, String country,
+			String province, String city, String isp, Date findTime) {
+		super();
+		this.id = id;
+		this.ip = ip;
+		this.port = port;
+		this.country = country;
+		this.province = province;
+		this.city = city;
+		this.isp = isp;
 		this.findTime = findTime;
 	}
 	

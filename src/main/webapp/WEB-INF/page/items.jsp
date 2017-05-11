@@ -3,146 +3,246 @@
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@include file= "/WEB-INF/page/include/taglib.jsp" %>
 <%-- <%
 	request.setAttribute("domain", "http://localhost/spTest/");
 %> --%>
-
+<%  
+String path = request.getContextPath();  
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
+%>  
 <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>信息管理系统</title>
-<link rel="stylesheet" type="text/css" href="css/index.min.css">
-<link rel="stylesheet" type="text/css" href="css/select.css">
-<script src="js/jquery.min.js"></script>
-<script type="text/javascript">
-   
-   function change(obj)
-   {
-       var test= '#list' + obj;
-       var test1 = "${tbList[1].ip }";
-       var user = {"tableIp.id":obj};
-	   //alert(${tbList[obj].ip });
-	  //alert(test );
-	  
-	    $.ajax({
-	    	type:"post",
-	    	url:"${pageContext.request.contextPath }/find.shtml",
-	    	data:user,
-	    	success:function(data)
-	    	{
-	    		var parseJson = $.parseJSON(data);
-	    		alert(parseJson.findTime);
-	    	
-	    		var ipvar = '<td><input type="text" style="width:80px;" name="fname" value ='+parseJson.ip+' /></td>';
-	    		var iportvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.port+' /></td>';
-	    		var countryvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.country+' /></td>';
-	    		var cityvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.country+' '+parseJson.city+' /></td>';
-	    		var ispvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.isp+' /></td>';
-	    		var findtimevar = '<td><input type="text" style="width:100px;" name="fname" value ='+parseJson.findTime+' /></td>';
-				
-				var clickvar='<td ><a href="#">返回</a> | <a href="javascript:;" onclick ="save('+obj+')">保存</a></td>'
-	    		
-	    		var html = '<td>'+ obj+'</td>'+ipvar+iportvar+countryvar+cityvar+ispvar+findtimevar+'<td>完成</td>'+clickvar;
-	    		$(test).empty();
-	    		$(test).append(html);
-	    	//alert(data);
-	    	},
-	    	error: function(textStatus){ 
-	    		alert(textStatus);
-              return;  
-       		 }  
+<html lang="en">
+
+	<head>
+		<!--
+        ===
+        This comment should NOT be removed.
+
+        Charisma v2.0.0
+
+        Copyright 2012-2014 Muhammad Usman
+        Licensed under the Apache License v2.0
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        http://usman.it
+        http://twitter.com/halalit_usman
+        ===
+    -->
+		<meta charset="utf-8">
+		<title>苏州欧拓信息管理系统</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+		<meta name="author" content="Muhammad Usman">
+
+		<!-- The styles -->
+		<link id="bs-css" href="${ctx}/css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+		<link href="${ctx}/css/charisma-app.css" rel="stylesheet">
+		
+		<link rel="stylesheet" type="text/css" href="${ctx}/css/index.min.css">
+		<!-- jQuery -->
+		
+
+		<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+		<!-- The fav icon -->
+		<link rel="shortcut icon" href="${ctx}/img/favicon.ico">
+		<script src="${ctx}/js/jquery.min.js"></script>
+	<script type="text/javascript">
+	   
+	   function change(obj)
+	   {
+	       var test= '#list' + obj;
+	       var test1 = "${tbList[1].ip }";
+	       var user = {"tableIp.id":obj};
+		   //alert(${tbList[obj].ip });
+		  //alert(test );
+		  
+		    $.ajax({
+		    	type:"post",
+		    	url:"${pageContext.request.contextPath }/find.shtml",
+		    	data:user,
+		    	success:function(data)
+		    	{
+		    		var parseJson = $.parseJSON(data);
+		    		alert(parseJson.findTime);
+		    	
+		    		var ipvar = '<td><input type="text" style="width:80px;" name="fname" value ='+parseJson.ip+' /></td>';
+		    		var iportvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.port+' /></td>';
+		    		var countryvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.country+' /></td>';
+		    		var cityvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.country+' '+parseJson.city+' /></td>';
+		    		var ispvar = '<td><input type="text" style="width:40px;" name="fname" value ='+parseJson.isp+' /></td>';
+		    		var findtimevar = '<td><input type="text" style="width:100px;" name="fname" value ='+parseJson.findTime+' /></td>';
+					
+					var clickvar='<td ><a href="#">返回</a> | <a href="javascript:;" onclick ="save('+obj+')">保存</a></td>'
+		    		
+		    		var html = '<td>'+ obj+'</td>'+ipvar+iportvar+countryvar+cityvar+ispvar+findtimevar+'<td>完成</td>'+clickvar;
+		    		$(test).empty();
+		    		$(test).append(html);
+		    	//alert(data);
+		    	},
+		    	error: function(textStatus){ 
+		    		alert(textStatus);
+	              return;  
+	       		 }  
+		    });
+		    
+		    
+	   }
+	
+	    $(function () {
+	      var data = ["a", "b", "c", "d"];
+	      var html = '<td>${items.id }</td><td></td><td></td><td></td><td></td><td></td><td></td><td>进行中</td><td>完成</td>';
+	      /* for (var i = 0; i < data.length; i ++) {
+	        html += "<td>" + data[i] + "</td>";
+	      } */
+	      $("#row").empty();
+	      $("#row").append(html);
+	      
 	    });
+	    function del(id){
+	    	if(confirm("是否删除")){
+	    		$.get("<%=basePath%>deleteUser.shtml?id="+id,function(data){
+		    		 if("删除成功" == data){  
+		               
+		                 window.location.reload();  
+		             }else{  
+		                $.each(data,function(index,item){
+		                	alert(data[index].port);
+		                });
+		             }  
+		    	});
+	    	}
+	    }
+	   /*  function queryItems(){
+	    	var item = $("#item").val();
+	    	var principal =$("#principal").val();
+	    	var phonenumber =$("#phonenumber").val();
+	    	var selectCorol =$(".selectCorol").val();
+	    	var params ={
+	    			"item":item,
+	    			"principal":principal,
+	    			"selectCorol":selectCorol
+	    		} */
+	    	
+	    	<%-- $.ajax({
+	    		url:"<%=basePath%>rolefind.shtml?adm="+new Date().getTime(),
+	    		type:"post",
+	    		data:params,
+	    		dataType:"json",
+	    		success:function(data){
+	    		/* alert(data) */
+	    			var data =JSON.stringify(data);
+	    			console.log(data)
+	    		 }
+	    	}); --%>
+	    	
 	    
-	    
-   }
+	  </script>
+	</head>
 
-    $(function () {
-      var data = ["a", "b", "c", "d"];
-      var html = '<td>${items.id }</td><td></td><td></td><td></td><td></td><td></td><td></td><td>进行中</td><td>完成</td>';
-      /* for (var i = 0; i < data.length; i ++) {
-        html += "<td>" + data[i] + "</td>";
-      } */
-      $("#row").empty();
-      $("#row").append(html);
-      
-    });
-  </script>
-</head>
-<body>
+	<body>
+		<!-- topbar starts -->
+		<div class="navbar navbar-default" role="navigation">
 
-	<!-- head -->
-	<div id="page-header" class="wrap header">
-		<header id="masthead" class="site-header" role="banner">
-			 <div class="hgroup">
-				<h1 class="site-title">
-					<a class="home-link" href="index.html" title="信息管理系统" rel="home">信息管理系统</a>							
-				</h1>
-				<h2 class="site-description" id="site-description">
-				苏州欧拓电子科技有限公司
-				</h2>
+			<div class="navbar-inner">
+				<button type="button" class="navbar-toggle pull-left animated flip">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+            	</button>
+				<a class="navbar-brand" href="index.html"> <img alt="Charisma Logo" src="${ctx}/img/logo20.png" class="hidden-xs" />
+					<span>outuo</span></a>
+
+				<!-- user dropdown starts -->
+				<div class="btn-group pull-right">
+					<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+	                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
+	                    <span class="caret"></span>
+                	</button>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#">Profile</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="login.html">Logout</a>
+						</li>
+					</ul>
+				</div>
+				<!-- user dropdown ends -->
+
+				<!-- theme selector starts -->
+				
+				<!-- theme selector ends -->
+
 			</div>
-		</header>
-	</div>
-
-	<!-- menu -->
-	<div id="primary-nav">
-		<div class="wrap nav">
-			<nav id="site-navigation" class="main-navigation" role="navigation">
-				<h3 class="menu-toggle">Menu</h3>
-				<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
-				<ul class="nav-menu">
-					<li id="menu_index" class="menu-item menu-item-type-custom menu-item-object-custom">
-						<a href="index.html">项目管理</a>
-					</li>
-					<li id="menu_api" class="menu-item menu-item-type-taxonomy menu-item-object-custom ">
-						<a href="task.html">任务派发</a>
-					</li>
-					<li id="menu_help" class="menu-item menu-item-type-taxonomy menu-item-object-custom current-menu-item">
-						<a href="items.html">物料清单</a>
-					</li>
-					<li style="margin-right: 10px;" class="menu-item menu-item-type-taxonomy menu-item-object-custom right"><i class="qq-icon" style="cursor: pointer;" onclick="window.open('http://jq.qq.com/?_wv=1027&amp;k=VFVEFs','_blank')"></i>QQ群：66782959 </li>
-				</ul>
-			</nav>
 		</div>
-	</div>
+		<!-- topbar ends -->
+		<div class="ch-container">
+			<div class="row">
 
-<!-- body -->
-<div class="wrap fullwidth">
-	<div id="content" style="width: auto;">
-	  <div id="post-2" class="post-2 page type-page status-publish hentry">
-	   <div>
-	   <a> 项目名称：<input name="itemsCustom.name" value="hello" /></a>
-	   <a> 商品名称：<input name="itemsCustom.name" /></a>
-	   <a> 商品名称：<input name="itemsCustom.name" /></a>
-	   <a>商品名称：<input name="itemsCustom.name" /></a>
-	   <a><input type="button" value="查询" onclick="queryItems()" /></a>
+				<!-- left menu starts -->
+				<div class="col-sm-2 col-lg-2">
+					<div class="sidebar-nav">
+						<div class="nav-canvas">
+							<div class="nav-sm nav nav-stacked">
+
+							</div>
+							<ul class="nav nav-pills nav-stacked main-menu">
+								<!--<li class="nav-header">Main</li>-->
+								<li>
+									<a class="ajax-link" href="index.html"><i class="glyphicon glyphicon-home"></i><span>&nbsp;项目管理</span></a>
+								</li>
+								<li>
+									<a class="ajax-link" href="task.html"><i class="glyphicon glyphicon-eye-open"></i><span>&nbsp;任务派发</span></a>
+								</li>
+								<li>
+									<a class="ajax-link" href="items.html"><i class="glyphicon glyphicon-edit"></i><span>&nbsp;物料管理</span></a>
+								</li>
+
+							</ul>
+							<!-- <label id="for-is-ajax" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label>-->
+						</div>
+					</div>
+				</div>
+				<!--/span-->
+				<!-- left menu ends -->
+
+				<noscript>
+	            <div class="alert alert-block col-md-12">
+	                <h4 class="alert-heading">Warning!</h4>
+	
+	                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+	                    enabled to use this site.</p>
+	            </div>
+       		 </noscript>
+
+				<div id="content" class="col-lg-10 col-sm-10">
+					<!-- content starts     iframe -->
+					<div class="search">
+	    <form action="<%=basePath%>rolefind.shtml" method="post">
+	   <a> 项目名称：<input type="text" name="item" id="item"/></a>
+	   <a> 负责人：<input type="text" name="principal" id="principal"/></a>
+	   <a> 联系人：<input type="number" name="phonenumber" id="phonenumber"/></a>
+	   <a><label class="control" for="ds_status" >状态</label>
+							
+			<select class="selectCorol" id="ds_status" name="itemsCustom.name" style="padding:8px;"  >
+				<option value="-1">待定</option>
+				<option value="0">正在进行</option>
+				<option value="1">已经完成</option>
+			</select>
+	   </a>
+	   <a><input type="submit" value="查询"  /></a>
+	 </form>
+	   <a href="add.html" title="" class="btn btn-primary addBtn" role="button">项目添加</a>
+	   
 	   </div>
-		<!-- <table width="100%" border=1>
-			<tr>
-			 <td>商品名称：</td>
-			 <td><input name="itemsCustom.name" />
-			</td>
-			<td>商品名称：<input name="itemsCustom.name" />
-			</td>
-			<td>商品名称：<input name="itemsCustom.name" />
-			</td>
-			<td>商品名称：<input name="itemsCustom.name" />
-			</td>
-			</tr>
-			<tr >
-			<td><input type="button" value="查询" onclick="queryItems()" />
-		     <input type="button" value="批量修改提交" onclick="editItemsAllSubmit()" /></td>
-			</tr>
-		</table>  -->
-
-					<!-- <blockquote style="font-style:normal;">
-				<p><b style="font-size: 14px;">你们的代理IP是怎么获取到的？</b></p>
-				<p>① 全网代理IP使用5台4核ECS服务器，运行分布式IP与端口扫描系统，每天扫描IP量几十万条。</p>
-				<p>② 我们不间断的运行着IP验证系统，精确地检测每一个代理IP的匿名度、响应时间、数据传输速度、地域、运营商，每秒钟都在验证，保证网站的IP都是高度可用的。</p>
-				<p>③ 我们提供了极其丰富的代理筛选和API接口，每次提取的IP不相同，只为更便捷地提取、更便捷的开发。</p>
-			</blockquote> -->
 			
 		
 		<div class="clear"></div>
@@ -171,7 +271,7 @@
 						</thead>
 						<tbody id='tr1' >
 							
-							<tr id="list1" >
+							<!-- <tr id="list1" >
 							    <td>进行中</td>
 								<td>进行中苏打水SF的酚AF分</td>
 								<td>进行中</td>
@@ -185,44 +285,75 @@
 								<td>进行中</td>
 								<td>进行中但是故事的故事的故事</td>
 								<td style="font-weight:bold" id =1><a href="#">查看</a> | <a href="#">删除</a> | <a id='' href="javascript:;" onclick ="change(1)">编辑</a></td>
+							</tr>							 -->
+							<c:forEach items="${itemList }" var="items" >
+							<tr id="list${items.id }" >
+							   	<td>${items.id}</td>
+								<td>${items.ip }</td>
+								<td>${items.port }</td>
+								<td>${items.country }</td>
+								<td>${items.province }</td>
+								<td> ${items.city }</td>
+								<td>${items.isp }</td>
+								<td>${items.findTime }</td>
+								<td>进行中</td>
+								<td>进行中</td>
+								<td>进行中</td>
+								<td></td>
+								<td style="font-weight:bold" id =${items.id }><a href="view.html?id=${ items.id}">查看</a> | <a href="#" onclick="del('${ items.id}')">删除</a> | <a href="edit.html?id=${ items.id}">编辑</a></td>
 							</tr>							
-							
+							</c:forEach>
 
 						</tbody>
 					</table>
-					<input type="button" onclick="getInnerHTML()" value="Alert innerHTML of table row" />
-
-					<div class="message" id="row">注：表中响应速度是中国测速服务器的测试数据，仅供参考。响应速度根据你机器所在的地理位置不同而有差异。</div>
-					
 					<div class="wp-pagenavi">
 						<span>第</span>
-					
+					<%-- 	<%
+						
+							PageParam pageParam = (PageParam)request.getAttribute("pageParam");
+							int currPage = pageParam.getCurrPage();
+							int totalPage = pageParam.getTotalPage();
+							for(int i = 1; i <= totalPage; i ++){
+								if(i == currPage){
+									%><span class="current"><%=currPage %></span><%
+								}else{
+									%><a href="index.html?page=<%=i %>"><%=i %></a><%
+								}
+							}
+						%> --%>
+						<%
+						
+							PageParam pageParam = (PageParam)request.getAttribute("pageParam");
+							int currPage = pageParam.getCurrPage();
+							int totalPage = pageParam.getTotalPage();
+							for(int i = 1; i <= totalPage; i ++){
+								if(i == currPage){
+									%><span class="current">${pageParam.currPage }</span><%
+								}else{
+									%><a href="items.html?page=<%=i %>"><%=i %></a><%
+								}
+							}
+						%>
 						<span>页</span>
 					</div>
 				</div>
-			</div>
+			<!-- </div> -->
 		 </div> 
 	</div>
 	<div class="clear"></div>
-	<div id="footer">
-			<div class="copyright">
-				<span class="footerleft">友情链接：
-				<a href="http://www.baidu.com/" target="_blank" title="敲代码，IT技术任你学">敲代码</a>
-				<a href="http://ip.qiaodm.com/" target="_blank" title="敲代码免费代理IP">敲代码免费代理IP</a>
-				<a href="http://proxy.goubanjia.com/" target="_blank" title="敲代码免费代理IP">全网代理IP</a>
-				<a href="http://wantsee.cn" target="_blank" title="">想看就看</a>
-				<a href="http://www.66ip.cn/index.html" target="_blank" title="">66代理</a>
-			</span>
-			<div class="clear"></div>
-		</div>
-		<div class="copyright" style="display: none;">
-			<span class="footerleft">Copyright © 2015</span>
-			<span class="footerright">All rights reserved</span>
-			<div class="clear"></div>
-		</div>
-	</div>
-</div>
+	
 
+<!-- content end -->
+				</div>
+			</div>
+		</div>
+		<!--/.fluid-container-->
 
-</body>
+		<!-- external javascript -->
+
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		
+	</body>
+
 </html>

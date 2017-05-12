@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sun.util.logging.resources.logging;
 
 import com.fp.ssm.common.PageParam;
+import com.fp.ssm.converter.CustomDateConverter;
 import com.fp.ssm.po.RoleResourcePo;
 import com.fp.ssm.po.TableIp;
 import com.fp.ssm.po.TableIpEx;
@@ -78,7 +80,7 @@ public class IndexController {
 		
 		//request.setAttribute("pageParam", pageParam);
 		//request.setAttribute("tbList", TbEx);
-	
+		
 		model.addAttribute("pageParam", pageParam);
 		model.addAttribute("tbList", TbEx);
 		
@@ -124,15 +126,20 @@ public class IndexController {
 	 */
 	@RequestMapping("/saveOrUpdate")
 	 public String saveOrUpdate(TableIp tableIp,HttpServletRequest req,Model model){ 
-	
+		/*CustomDateConverter cus =new CustomDateConverter();
+		Date time =cus.convert(tableIp.getFindTime().toString());
+		tableIp.setFindTime(time);*/
 		String message ="";
 		if(!service.update(tableIp)){
 			message ="修改成功";
+			
 		}else{
 			message ="修改失败";
+			return "";
 		}
 		model.addAttribute("message", message);
 		return "redirect:/index.html";
+		
 	 }
 	/**
 	 * 
@@ -151,7 +158,7 @@ public class IndexController {
 	/**
 	 * 
 	 * 用户信息添加
-	 * 方法名：add
+	 * 
 	 * @param req
 	 * @param tableIp
 	 * @return String
@@ -161,7 +168,7 @@ public class IndexController {
 	public String insert(HttpServletRequest req, TableIp tableIp){
 		String addUser = service.insert(tableIp);
 		req.setAttribute("addUser", addUser);
-		return "/add";
+		return "add";
 	}
 	/**
 	 * 

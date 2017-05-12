@@ -11,6 +11,7 @@
 String path = request.getContextPath();  
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
 %>  
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,8 +57,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- The fav icon -->
 <link rel="shortcut icon" href="${ctx}/img/favicon.ico">
 <script src="${ctx}/js/jquery.min.js"></script>
+<!-- 引入日期控件 -->
+<script src="${ctx}/bower_components/laydate/laydate.js"></script>
 <script type="text/javascript">
-	function change(obj) {
+	/* function change(obj) {
 		var test = '#list' + obj;
 		var test1 = "${tbList[1].ip }";
 		var user = {
@@ -98,17 +101,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 				});
 
-	}
+	} */
 
 	$(function() {
-		var data = [ "a", "b", "c", "d" ];
+	/* 	var data = [ "a", "b", "c", "d" ];
 		var html = '<td>${items.id }</td><td></td><td></td><td></td><td></td><td></td><td></td><td>进行中</td><td>完成</td>';
 		/* for (var i = 0; i < data.length; i ++) {
 		  html += "<td>" + data[i] + "</td>";
 		} */
-		$("#row").empty();
-		$("#row").append(html);
-
+		/*$("#row").empty();
+		$("#row").append(html); */
+		var protime=$("#protime").text();
+		
+		function getOffsetDays(time1, time2) {
+		    var offsetTime = Math.abs(time1 - time2);
+		    return Math.floor(offsetTime / (3600 * 24 * 1e3));
+		}
+		var time =getOffsetDays((new Date(protime)).getTime(),Date.now());
+		var html =time+"天";
+		$(".retime").append(html);
+		
+		
+		
 	});
 	function updateUser(){
 		var form =document.forms[0];
@@ -131,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</button>
 			<a class="navbar-brand" href="blank.html"> <img
 				alt="Charisma Logo" src="${ctx}/img/logo20.png" class="hidden-xs" />
-				<span style="color:#fff;">Charisma</span></a>
+				<span style="color:#fff;">outuo</span></a>
 
 			<!-- user dropdown starts -->
 			<div class="btn-group pull-right">
@@ -196,7 +210,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<div id="content" class="col-lg-10 col-sm-10">
 				<!--         content starts     iframe      -->
-				<form class="form-horizontal" role="form">
+				<form class="form-horizontal" role="form" style="display:block;">
 					
 					<fieldset>
 					<input type="hidden" name="id" value="${userEdit.id}"/>
@@ -239,19 +253,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 control-label" for="ds_time">剩余时间</label>
+							<%-- <label class="col-sm-2 control-label" for="ds_time">剩余时间</label>
 							<div class="col-sm-4">
-								<input class="form-control" id="ds_time" type="text"
+								<input class="form-control retime" id="ds_time" type="text"
 									placeholder="root" id="disabledInput" value="${userEdit.findTime}" disabled/>
-							</div>
-							<label class="col-sm-2 control-label" for="ds_stime">交货时间</label>
+							</div> --%>
+							<label class="col-sm-2 control-label" for="protime">交货时间</label>
 							<div class="col-sm-4">
-								<input class="form-control" id="ds_stime" type="date"
-									value="${userEdit.findTime}" />
+								<input  class="form-control" class="laydate-icon" name="findTime"  id="protime"  type="text" onclick="laydate()" 
+									value="<fmt:formatDate value="${userEdit.findTime}" pattern="yyyy/MM/dd"/>" />
 							</div>
 							<label class="col-sm-2 control-label" for="ds_status"
-								style="margin-top: 13px;">状态</label>
-							<div class="col-sm-10" style="margin-top: 13px;">
+								>状态</label>
+							<div class="col-sm-4" >
 								<select class="form-control" id="ds_status">
 									<option value="正在进行">正在进行</option>
 									<option value="已经完成">已经完成</option>

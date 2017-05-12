@@ -2,6 +2,8 @@ package com.fp.ssm.po;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class TableIp {
 
 	private int id ;
@@ -17,89 +19,57 @@ public class TableIp {
 	private String city ;
 	
 	private String isp ;
-	
+	@DateTimeFormat(pattern="yyyy/mm/dd")
 	private Date findTime ;
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getIp() {
 		return ip;
 	}
-
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	
 	public String getPort() {
 		return port;
 	}
-
 	public void setPort(String port) {
 		this.port = port;
 	}
-
 	public String getCountry() {
 		return country;
 	}
-
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
 	public String getProvince() {
 		return province;
 	}
-
 	public void setProvince(String province) {
 		this.province = province;
 	}
-
 	public String getCity() {
 		return city;
 	}
-
 	public void setCity(String city) {
 		this.city = city;
 	}
-
 	public String getIsp() {
 		return isp;
 	}
-
 	public void setIsp(String isp) {
 		this.isp = isp;
 	}
-
 	public Date getFindTime() {
 		return findTime;
 	}
-
 	public void setFindTime(Date findTime) {
 		this.findTime = findTime;
 	}
-	
-	public TableIp() {
-		super();
-	}
 
-	public TableIp(int id, String ip, String port, String country,
-			String province, String city, String isp, Date findTime) {
-		super();
-		this.id = id;
-		this.ip = ip;
-		this.port = port;
-		this.country = country;
-		this.province = province;
-		this.city = city;
-		this.isp = isp;
-		this.findTime = findTime;
-	}
 	
 	
 }

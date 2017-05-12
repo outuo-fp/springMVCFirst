@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <link href="${ctx}/css/charisma-app.css" rel="stylesheet">
 
-<link href='${ctx}/css/animate.min.css' rel='stylesheet'>
+
 <link rel="stylesheet" type="text/css" href="${ctx}/css/index.min.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap.min.css">
 <!-- jQuery -->
@@ -56,8 +56,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- The fav icon -->
 <link rel="shortcut icon" href="${ctx}/img/favicon.ico">
 <script src="${ctx}/js/jquery.min.js"></script>
+<script src="${ctx}/bower_components/laydate/laydate.js"></script>
 <script type="text/javascript">
-	function change(obj) {
+	/* function change(obj) {
 		var test = '#list' + obj;
 		var test1 = "${tbList[1].ip }";
 		var user = {
@@ -66,8 +67,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//alert(${tbList[obj].ip });
 		//alert(test );
 
-		$
-				.ajax({
+	
+				$.ajax({
 					type : "post",
 					url : "${pageContext.request.contextPath }/find.shtml",
 					data : user,
@@ -90,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								+ '<td>完成</td>' + clickvar;
 						$(test).empty();
 						$(test).append(html);
-						//alert(data);
+						
 					},
 					error : function(textStatus) {
 						alert(textStatus);
@@ -99,24 +100,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});
 
 	}
-
+ */
 	$(function() {
-		var data = [ "a", "b", "c", "d" ];
-		var html = '<td>${items.id }</td><td></td><td></td><td></td><td></td><td></td><td></td><td>进行中</td><td>完成</td>';
+		/* var data = [ "a", "b", "c", "d" ];
+		var html = '<td>${items.id }</td><td></td><td></td><td></td><td></td><td></td><td></td><t */d>进行中</td><td>完成</td>';
 		/* for (var i = 0; i < data.length; i ++) {
 		  html += "<td>" + data[i] + "</td>";
 		} */
-		$("#row").empty();
+		/*$("#row").empty();
 		$("#row").append(html);
-
+	*/
 	});
 	function insertUser(){
 		var form =document.forms[0];
 		form.action = "<%=basePath%>insertUser.shtml";
 	    form.method="post";  
-	    form.submit();
-	  
+	    form.submit(); 
 	}
+	
 </script>
 </head>
 
@@ -130,9 +131,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="blank.html"> <img
+			<a class="navbar-brand" href="index.html"> <img
 				alt="Charisma Logo" src="${ctx}/img/logo20.png" class="hidden-xs" />
-				<span style="color:#fff;">Charisma</span></a>
+				<span style="color:#fff;">outuo</span></a>
 
 			<!-- user dropdown starts -->
 			<div class="btn-group pull-right">
@@ -150,34 +151,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- user dropdown ends -->
 
 			<!-- theme selector starts -->
-			<div class="btn-group pull-right theme-container animated tada">
-				<button class="btn btn-default dropdown-toggle"
-					data-toggle="dropdown">
-					<i class="glyphicon glyphicon-tint"></i><span
-						class="hidden-sm hidden-xs"> Change Theme / Skin</span> <span
-						class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" id="themes">
-					<li><a data-value="classic" href="#"><i class="whitespace"></i>
-							Classic</a></li>
-					<li><a data-value="cerulean" href="#"><i
-							class="whitespace"></i> Cerulean</a></li>
-					<li><a data-value="cyborg" href="#"><i class="whitespace"></i>
-							Cyborg</a></li>
-					<li><a data-value="simplex" href="#"><i class="whitespace"></i>
-							Simplex</a></li>
-					<li><a data-value="darkly" href="#"><i class="whitespace"></i>
-							Darkly</a></li>
-					<li><a data-value="lumen" href="#"><i class="whitespace"></i>
-							Lumen</a></li>
-					<li><a data-value="slate" href="#"><i class="whitespace"></i>
-							Slate</a></li>
-					<li><a data-value="spacelab" href="#"><i
-							class="whitespace"></i> Spacelab</a></li>
-					<li><a data-value="united" href="#"><i class="whitespace"></i>
-							United</a></li>
-				</ul>
-			</div>
+			
 			<!-- theme selector ends -->
 
 		</div>
@@ -224,7 +198,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<div id="content" class="col-lg-10 col-sm-10">
 				<!--         content starts     iframe      -->
-				<form class="form-horizontal" role="form">
+				<form class="form-horizontal" action="<%=basePath%>insertUser.shtml" method="post">
 					
 					<fieldset>
 			
@@ -233,8 +207,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="form-group">
 							<label class="col-sm-2 control-label" for="ds_host" >项目名称</label>
 							<div class="col-sm-4">
-								<input class="form-control" id="ds_host" type="text"
-									 name="port"/>
+								<input type="text" name="port" class="form-control" id="ds_host"   />
 							</div>
 							<label class="col-sm-2 control-label" for="ds_name">负责人</label>
 							<div class="col-sm-4">
@@ -267,14 +240,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-2 control-label" for="ds_time">剩余时间</label>
+							<!-- <label class="col-sm-2 control-label" for="ds_time">剩余时间</label>
 							<div class="col-sm-4">
 								<input class="form-control" id="ds_time" type="text"
 									placeholder="root" id="disabledInput"  disabled/>
-							</div>
+							</div> -->
 							<label class="col-sm-2 control-label" for="ds_stime">交货时间</label>
 							<div class="col-sm-4">
-								<input class="form-control" id="ds_stime" type="date" />
+								<input class="form-control" class="laydate-icon" id="ds_stime" type="text" name="findTime" onclick="laydate()" />
 							</div>
 							<label class="col-sm-2 control-label" for="ds_status"
 								style="margin-top: 13px;visibility:hidden">状态</label>
@@ -289,9 +262,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="row">
 							<div class="col-sm-12 text-center bg-danger"
 								style="padding: 2px;background-color: #eeeeee;">
-								<a href="#" class="btn btn-primary active" role="button" onclick="insertUser()">&nbsp;&nbsp;&nbsp;保存&nbsp;&nbsp;&nbsp;</a>
+								<input class="btn  btn-success" type="submit" value="保存" style="padding:2px;width:80px;">
 								
-								&nbsp;${addUser }<br> 
+								&nbsp;${addUser}<br> 
 							</div>
 						</div>
 					</fieldset>

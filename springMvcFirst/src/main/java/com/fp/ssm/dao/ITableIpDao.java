@@ -1,5 +1,6 @@
 package com.fp.ssm.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ import com.fp.ssm.po.TableIpShowVo;
 
 @Repository
 public interface ITableIpDao {
-
+	
 	int getRowCount();
 
 	public List<TableIpEx> selectByParams(TableIpShowVo tableipvo) ;

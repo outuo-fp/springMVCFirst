@@ -3,6 +3,7 @@
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@include file= "/WEB-INF/page/include/taglib.jsp" %>
 <%-- <%
 	request.setAttribute("domain", "http://localhost/spTest/");
@@ -95,14 +96,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   }
 	
 	    $(function () {
-	      var data = ["a", "b", "c", "d"];
-	      var html = '<td>${items.id }</td><td></td><td></td><td></td><td></td><td></td><td></td><td>进行中</td><td>完成</td>';
-	      /* for (var i = 0; i < data.length; i ++) {
-	        html += "<td>" + data[i] + "</td>";
-	      } */
-	      $("#row").empty();
-	      $("#row").append(html);
-	      
+	    
+	     
+			//封装指定时间和当前时间相差的天数
+			function getOffsetDays(time1, time2) {
+			    var offsetTime = Math.abs(time1 - time2);
+			    return Math.floor(offsetTime / (3600 * 24 * 1e3));
+			}
+	      //计算剩余时间
+	     /*  var protime=$("#protime").text();
+	      alert(protime);
+			var time =getOffsetDays((new Date(protime)).getTime(),Date.now());
+			var html =time+"天";
+			$(".retime").append(html); */
 	    });
 	    function del(id){
 	    	if(confirm("是否删除")){
@@ -234,7 +240,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <form action="<%=basePath%>rolefind.shtml" method="post">
 	   <a> 项目名称：<input type="text" name="item" id="item"/></a>
 	   <a> 负责人：<input type="text" name="principal" id="principal"/></a>
-	   <a> 联系人：<input type="text" name="phone" id="phonenumber"/></a>
+	   <a> 联系人：<input type="text" name="phone" id="phone"/></a>
 	   <a><label class="control" for="ds_status" >状态</label>
 							
 			<select class="selectCorol" id="ds_status" name="selectCorol" style="padding:8px;"  >
@@ -266,8 +272,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>金额</th>
 								<th>部门</th>
 								<th>联系人</th>
-								<th>剩余时间</th>
 								<th>交货时间</th>
+								<th>剩余时间</th>
 								<th>状态</th>
 								<th> &nbsp;&nbsp;操作&nbsp;</th>
 								
@@ -284,8 +290,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${items.province }</td>
 								<td> ${items.city }</td>
 								<td>${items.isp }</td>
-								<td>进行中</td>
-								<td>${items.findTime }</td>
+								<td class="protime">
+								
+								<fmt:formatDate  value= "${items.findTime}" pattern= "yyyy/MM/dd" />
+								   
+								</td>
+								<td class="retime">
+								<%-- 	<jsp:useBean id= "nowDate" class = "java.util.Date" />
+									<fmt:formatDate var= "nowStr" value= "${nowDate}" pattern= "yyyy/MM/dd" />
+									<c:set var= "interval" value= "${someDate} - ${nowStr}" />
+									${interval}
+ --%>								</td>
 								<td>进行中</td>
 								
 								<td style="font-weight:bold" id =${items.id }><a href="view.html?id=${ items.id}">查看</a> | <a href="#" onclick="del('${ items.id}')">删除</a> | <a href="edit.html?id=${ items.id}">编辑</a></td>

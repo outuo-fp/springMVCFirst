@@ -3,6 +3,7 @@
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@include file= "/WEB-INF/page/include/taglib.jsp" %>
 <%-- <%
 	request.setAttribute("domain", "http://localhost/spTest/");
@@ -95,14 +96,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   }
 	
 	    $(function () {
-	      var data = ["a", "b", "c", "d"];
-	      var html = '<td>${items.id }</td><td></td><td></td><td></td><td></td><td></td><td></td><td>进行中</td><td>完成</td>';
+	     /*  var data = ["a", "b", "c", "d"];
+	      var html = '<td>${items.id }</td><td></td><td></td><td></td><td></td><td></td><td></td><td>进行中</td><td>完成</td>'; */
 	      /* for (var i = 0; i < data.length; i ++) {
 	        html += "<td>" + data[i] + "</td>";
 	      } */
-	      $("#row").empty();
-	      $("#row").append(html);
-	      
+	     /*  $("#row").empty();
+	      $("#row").append(html); */
+	      // 
+	     
+			//封装指定时间和当前时间相差的天数
+			function getOffsetDays(time1, time2) {
+			    var offsetTime = Math.abs(time1 - time2);
+			    return Math.floor(offsetTime / (3600 * 24 * 1e3));
+			}
+	      //计算剩余时间
+	     /*  var protime=$("#protime").text();
+	      alert(protime);
+			var time =getOffsetDays((new Date(protime)).getTime(),Date.now());
+			var html =time+"天";
+			$(".retime").append(html); */
 	    });
 	    function del(id){
 	    	if(confirm("是否删除")){
@@ -111,12 +124,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		               
 		                 window.location.reload();  
 		             }else{  
-		                 alert("删除失败");  
+		                $.each(data,function(index,item){
+		                	alert(data[index].port);
+		                });
 		             }  
 		    	});
 	    	}
 	    }
-	   <%--  function queryItems(){
+	   /*  function queryItems(){
 	    	var item = $("#item").val();
 	    	var principal =$("#principal").val();
 	    	var phonenumber =$("#phonenumber").val();
@@ -125,26 +140,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			"item":item,
 	    			"principal":principal,
 	    			"selectCorol":selectCorol
-	    		}
+	    		} */
 	    	
-	    	$.ajax({
+	    	<%-- $.ajax({
 	    		url:"<%=basePath%>rolefind.shtml?adm="+new Date().getTime(),
 	    		type:"post",
 	    		data:params,
 	    		dataType:"json",
 	    		success:function(data){
+	    		/* alert(data) */
 	    			var data =JSON.stringify(data);
-	    			
-	    			if(data=="[]"){
-	    				$("#item").empty();
-	    				alert("查询不到数据，请重新输入");
-	    				$("#item").focus();
-	    			}else{
-	    				window.location.href="";
-	    			}
+	    			console.log(data)
 	    		 }
-	    	});
-	    } --%>
+	    	}); --%>
+	    	
+	    
 	  </script>
 	</head>
 
@@ -237,18 +247,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <form action="<%=basePath%>rolefind.shtml" method="post">
 	   <a> 项目名称：<input type="text" name="item" id="item"/></a>
 	   <a> 负责人：<input type="text" name="principal" id="principal"/></a>
-	   <a> 联系人：<input type="number" name="phonenumber" id="phonenumber"/></a>
+	   <a> 联系人：<input type="text" name="phone" id="phonenumber"/></a>
 	   <a><label class="control" for="ds_status" >状态</label>
 							
-			<select class="selectCorol" id="ds_status" name="itemsCustom.name" style="padding:8px;" value="待定" >
+			<select class="selectCorol" id="ds_status" name="selectCorol" style="padding:8px;"  >
 				<option value="-1">待定</option>
 				<option value="0">正在进行</option>
 				<option value="1">已经完成</option>
 			</select>
 	   </a>
-	   <a><input type="submit" value="查询" onclick="queryItems()" /></a>
+	   <a><input type="submit" value="查询"  /></a>
 	 </form>
-	   <a href="add.html" title="" class="btn btn-primary  " role="button">项目添加</a>
+	   <a href="add.html" title="" class="btn btn-primary addBtn" role="button">项目添加</a>
+	   
 	   </div>
 		
 		
@@ -268,8 +279,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>金额</th>
 								<th>部门</th>
 								<th>联系人</th>
-								<th>剩余时间</th>
 								<th>交货时间</th>
+								<th>剩余时间</th>
 								<th>状态</th>
 								<th> &nbsp;&nbsp;操作&nbsp;</th>
 								
@@ -283,12 +294,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${items.ip }</td>
 								<td>${items.port }</td>
 								<td>${items.country }</td>
-								<td>${items.province } ${items.city }</td>
+								<td>${items.province }</td>
+								<td> ${items.city }</td>
 								<td>${items.isp }</td>
-								<td>${items.findTime }</td>
+								<td class="protime">
+								
+								<fmt:formatDate var= "someDate" value= "${items.findTime}" pattern= "yyyy/MM/dd" />
+								    ${someDate}
+								</td>
+								<td class="retime">
+									<jsp:useBean id= "nowDate" class = "java.util.Date" />
+									<fmt:formatDate var= "nowStr" value= "${nowDate}" pattern= "MM/dd" />
+									<c:set var= "interval" value= "${someDate} - ${nowStr}" />
+									${interval}
+								</td>
 								<td>进行中</td>
-								<td>进行中</td>
-								<td>进行中</td>
+								
 								<td style="font-weight:bold" id =${items.id }><a href="view.html?id=${ items.id}">查看</a> | <a href="#" onclick="del('${ items.id}')">删除</a> | <a href="edit.html?id=${ items.id}">编辑</a></td>
 							</tr>							
 							</c:forEach>

@@ -52,7 +52,7 @@
          		 and ip LIKE '%${principal}%'   
          </if>
           <if test="phone!=null and phone!=''">
-         		 and city LIKE '%${phone}%'   
+         		 and isp LIKE '%${phone}%'   
          </if>
           
         </where>

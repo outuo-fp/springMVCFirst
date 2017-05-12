@@ -1,8 +1,10 @@
 <%@page import="com.fp.ssm.common.PageParam"
-	import="com.fp.ssm.po.TableIpShowVo"%>
+	import="com.fp.ssm.po.TableIpShowVo" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@include file="/WEB-INF/page/include/taglib.jsp"%>
 <%-- <%
 	request.setAttribute("domain", "http://localhost/spTest/");
@@ -97,14 +99,23 @@
 	}
 
 	$(function() {
-		var data = [ "a", "b", "c", "d" ];
+		/* var data = [ "a", "b", "c", "d" ];
 		var html = '<td>${items.id }</td><td></td><td></td><td></td><td></td><td></td><td></td><td>进行中</td><td>完成</td>';
 		/* for (var i = 0; i < data.length; i ++) {
 		  html += "<td>" + data[i] + "</td>";
 		} */
-		$("#row").empty();
-		$("#row").append(html);
-
+		/*$("#row").empty();
+		$("#row").append(html); */
+		
+			var protime=$("#protime").text();
+			
+			function getOffsetDays(time1, time2) {
+			    var offsetTime = Math.abs(time1 - time2);
+			    return Math.floor(offsetTime / (3600 * 24 * 1e3));
+			}
+			var time =getOffsetDays((new Date(protime)).getTime(),Date.now());
+			var html =time+"天";
+			$(".retime").append(html);
 	});
 </script>
 </head>
@@ -179,7 +190,7 @@
 					</p>
 				</div>
 			</noscript>
-
+			
 			<div id="content" class="col-lg-10 col-sm-10">
 				<!-- content starts     iframe -->
 				<div class="showView">
@@ -211,11 +222,11 @@
 						<div class="col-sm-2 text-danger">联系人:</div>
 						<div class="col-sm-3">${user.city }</div>
 						<div class="col-sm-2 col-sm-offset-2 text-danger">剩余时间:</div>
-						<div class="">进行中</div>
+						<div class="retime"></div>
 					</div>
 					<div class="row">
 						<div class="col-sm-2 text-danger">交貨時間:</div>
-						<div class="col-sm-3">${user.findTime }</div>
+						<div class="col-sm-3" id="protime"><fmt:formatDate value="${user.findTime}" pattern="yyyy/MM/dd"/></div>
 						<div class="col-sm-2 col-sm-offset-2 text-danger">状态:</div>
 						<div class="">进行中</div>
 					</div>

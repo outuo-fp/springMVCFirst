@@ -1,5 +1,6 @@
 package com.fp.ssm.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,8 +8,13 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 
+
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
 
+import com.fp.ssm.converter.CustomDateConverter;
 import com.fp.ssm.dao.ITableIpDao;
 import com.fp.ssm.po.RoleResourcePo;
 import com.fp.ssm.po.TableIp;
@@ -28,7 +34,7 @@ public class TableIpService {
 		return dao.getRowCount();
 	}
 
-	public List<TableIpEx> getIpListByPage(TableIpShowVo tableipvo) {
+	public List<TableIpEx> getIpListByPage(TableIpShowVo tableipvo){
 //		int currPage = pageParam.getCurrPage();
 //		// limit offset, size
 //		int offset = (currPage - 1) * PageParam.pageSize ;
@@ -36,6 +42,8 @@ public class TableIpService {
 //		Map<String, Object> params = new HashMap<String, Object>();
 //		params.put("offset", offset);
 //		params.put("size", size);
+		/*CustomDateConverter converter =new CustomDateConverter();
+		Date findTime=converter.convert(tableipvo.getTableIp().getFindTime().toString());*/
 		
 		List<TableIpEx> ipList;
 		ipList = dao.selectByParams(tableipvo);
@@ -43,7 +51,6 @@ public class TableIpService {
 		
 		return ipList;
 	}
-
 	public String findIp(String number, String country, String isp) {
 		int size = 100;
 		try {
@@ -80,6 +87,7 @@ public class TableIpService {
 	public boolean update(TableIp tableIp){
 		
 		return dao.update(tableIp);
+		
 	} 
 	/**
 	 * 

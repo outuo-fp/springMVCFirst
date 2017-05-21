@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.fp.ssm.dao.ITableIpDao">
+	  
+	<select id="getRowCount" resultType="int">
+		select count(*) from table_ip
+	</select>
+	
+	<select id="findById" resultType="com.fp.ssm.po.TableIpEx" parameterType="Integer">
+		select * from table_ip where id = #{id }
+	</select>
+	
+	<select id="selectByParams" resultType="com.fp.ssm.po.TableIpEx" parameterType="com.fp.ssm.po.TableIpShowVo">
+		select * from table_ip  
+		order by findTime desc
+		limit ${offset}, ${size}
+	</select>
+	
+	<select id="fetchByParams" resultType="com.fp.ssm.po.TableIp" parameterType="map">
+		select * from table_ip
+		where 1=1
+		<if test="country != null and country != ''">
+			and country = '${country}'
+		</if>
+		<if test="isp != null and isp != ''">
+			and isp = '${isp}'
+		</if>
+		limit ${size}
+	</select>
+	<update id="update" parameterType="com.fp.ssm.po.TableIp">    
+        update table_ip set ip=#{ip},country=#{country},port=#{port},province=#{province},city=#{city},isp=#{isp},findTime=#{findTime} where id=#{id}    
+    </update>  
+    <insert id="insert" parameterType="com.fp.ssm.po.TableIp">    
+        insert into table_ip(ip,country,port,province,city,isp,findTime) values(#{ip},#{country},port=#{port},#{province},#{city},#{isp},#{findTime})     
+    </insert> 
+     <delete id="delete" parameterType="int">  
+        delete from table_ip where id=#{id}  
+    </delete> 
+    
+     <select id="selectByLike"  parameterType="java.util.Map" resultType="com.fp.ssm.po.TableIp">  
+        <!-- 用include标签引入sql片段，refid写定义sql片段的id，where标签不要写在片段里 -->  
+        select * from table_ip 
+        <where>
+        	<if test="item==null and item =''">
+        	and 1=1
+        </if>
+         <if test="item!=null and item!=''">
+         		 and port LIKE '%${item}%'   
+         </if>
+          <if test="principal!=null and principal!=''">
+         		 and ip LIKE '%${principal}%'   
+         </if>
+          <if test="phone!=null and phone!=''">
+         		 and isp LIKE '%${phone}%'   
+         </if>
+          
+        </where>
+    </select>      
+</mapper> 

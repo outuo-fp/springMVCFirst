@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fp.ssm.dao.TbProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.fp.ssm.po.TbProject" >
+    <id column="pro_id" property="proId" jdbcType="BIGINT" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="total_fee" property="totalFee" jdbcType="BIGINT" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="customer" property="customer" jdbcType="VARCHAR" />
+    <result column="req_url" property="reqUrl" jdbcType="VARCHAR" />
+    <result column="elc_url" property="elcUrl" jdbcType="VARCHAR" />
+    <result column="mech_url" property="mechUrl" jdbcType="VARCHAR" />
+    <result column="soft_url" property="softUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="deadline" property="deadline" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.fp.ssm.po.TbProject" extends="BaseResultMap" >
+    <result column="comment" property="comment" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pro_id, pro_name, user_id, num, total_fee, department, customer, req_url, elc_url, 
+    mech_url, soft_url, status, created, deadline
+  </sql>
+  <sql id="Blob_Column_List" >
+    comment
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.fp.ssm.po.TbProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fp.ssm.po.TbProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_project
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_project
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fp.ssm.po.TbProjectExample" >
+    delete from tb_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fp.ssm.po.TbProject" >
+    insert into tb_project (pro_id, pro_name, user_id, 
+      num, total_fee, department, 
+      customer, req_url, elc_url, 
+      mech_url, soft_url, status, 
+      created, deadline, comment
+      )
+    values (#{proId,jdbcType=BIGINT}, #{proName,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{num,jdbcType=INTEGER}, #{totalFee,jdbcType=BIGINT}, #{department,jdbcType=VARCHAR}, 
+      #{customer,jdbcType=VARCHAR}, #{reqUrl,jdbcType=VARCHAR}, #{elcUrl,jdbcType=VARCHAR}, 
+      #{mechUrl,jdbcType=VARCHAR}, #{softUrl,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{created,jdbcType=TIMESTAMP}, #{deadline,jdbcType=TIMESTAMP}, #{comment,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fp.ssm.po.TbProject" >
+    insert into tb_project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="proName != null" >
+        pro_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="totalFee != null" >
+        total_fee,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="customer != null" >
+        customer,
+      </if>
+      <if test="reqUrl != null" >
+        req_url,
+      </if>
+      <if test="elcUrl != null" >
+        elc_url,
+      </if>
+      <if test="mechUrl != null" >
+        mech_url,
+      </if>
+      <if test="softUrl != null" >
+        soft_url,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+      <if test="deadline != null" >
+        deadline,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proId != null" >
+        #{proId,jdbcType=BIGINT},
+      </if>
+      <if test="proName != null" >
+        #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null" >
+        #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="reqUrl != null" >
+        #{reqUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="elcUrl != null" >
+        #{elcUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mechUrl != null" >
+        #{mechUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="softUrl != null" >
+        #{softUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deadline != null" >
+        #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fp.ssm.po.TbProjectExample" resultType="java.lang.Integer" >
+    select count(*) from tb_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_project
+    <set >
+      <if test="record.proId != null" >
+        pro_id = #{record.proId,jdbcType=BIGINT},
+      </if>
+      <if test="record.proName != null" >
+        pro_name = #{record.proName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalFee != null" >
+        total_fee = #{record.totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.department != null" >
+        department = #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customer != null" >
+        customer = #{record.customer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqUrl != null" >
+        req_url = #{record.reqUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.elcUrl != null" >
+        elc_url = #{record.elcUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mechUrl != null" >
+        mech_url = #{record.mechUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softUrl != null" >
+        soft_url = #{record.softUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.created != null" >
+        created = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deadline != null" >
+        deadline = #{record.deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.comment != null" >
+        comment = #{record.comment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_project
+    set pro_id = #{record.proId,jdbcType=BIGINT},
+      pro_name = #{record.proName,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      num = #{record.num,jdbcType=INTEGER},
+      total_fee = #{record.totalFee,jdbcType=BIGINT},
+      department = #{record.department,jdbcType=VARCHAR},
+      customer = #{record.customer,jdbcType=VARCHAR},
+      req_url = #{record.reqUrl,jdbcType=VARCHAR},
+      elc_url = #{record.elcUrl,jdbcType=VARCHAR},
+      mech_url = #{record.mechUrl,jdbcType=VARCHAR},
+      soft_url = #{record.softUrl,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      created = #{record.created,jdbcType=TIMESTAMP},
+      deadline = #{record.deadline,jdbcType=TIMESTAMP},
+      comment = #{record.comment,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_project
+    set pro_id = #{record.proId,jdbcType=BIGINT},
+      pro_name = #{record.proName,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      num = #{record.num,jdbcType=INTEGER},
+      total_fee = #{record.totalFee,jdbcType=BIGINT},
+      department = #{record.department,jdbcType=VARCHAR},
+      customer = #{record.customer,jdbcType=VARCHAR},
+      req_url = #{record.reqUrl,jdbcType=VARCHAR},
+      elc_url = #{record.elcUrl,jdbcType=VARCHAR},
+      mech_url = #{record.mechUrl,jdbcType=VARCHAR},
+      soft_url = #{record.softUrl,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      created = #{record.created,jdbcType=TIMESTAMP},
+      deadline = #{record.deadline,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fp.ssm.po.TbProject" >
+    update tb_project
+    <set >
+      <if test="proName != null" >
+        pro_name = #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="totalFee != null" >
+        total_fee = #{totalFee,jdbcType=BIGINT},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null" >
+        customer = #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="reqUrl != null" >
+        req_url = #{reqUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="elcUrl != null" >
+        elc_url = #{elcUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mechUrl != null" >
+        mech_url = #{mechUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="softUrl != null" >
+        soft_url = #{softUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deadline != null" >
+        deadline = #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fp.ssm.po.TbProject" >
+    update tb_project
+    set pro_name = #{proName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      num = #{num,jdbcType=INTEGER},
+      total_fee = #{totalFee,jdbcType=BIGINT},
+      department = #{department,jdbcType=VARCHAR},
+      customer = #{customer,jdbcType=VARCHAR},
+      req_url = #{reqUrl,jdbcType=VARCHAR},
+      elc_url = #{elcUrl,jdbcType=VARCHAR},
+      mech_url = #{mechUrl,jdbcType=VARCHAR},
+      soft_url = #{softUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      deadline = #{deadline,jdbcType=TIMESTAMP},
+      comment = #{comment,jdbcType=LONGVARCHAR}
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fp.ssm.po.TbProject" >
+    update tb_project
+    set pro_name = #{proName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      num = #{num,jdbcType=INTEGER},
+      total_fee = #{totalFee,jdbcType=BIGINT},
+      department = #{department,jdbcType=VARCHAR},
+      customer = #{customer,jdbcType=VARCHAR},
+      req_url = #{reqUrl,jdbcType=VARCHAR},
+      elc_url = #{elcUrl,jdbcType=VARCHAR},
+      mech_url = #{mechUrl,jdbcType=VARCHAR},
+      soft_url = #{softUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      deadline = #{deadline,jdbcType=TIMESTAMP}
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </update>
+</mapper>

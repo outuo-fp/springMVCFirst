@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fp.ssm.dao.TbBomMapper" >
+  <resultMap id="BaseResultMap" type="com.fp.ssm.po.TbBom" >
+    <id column="bom_id" property="bomId" jdbcType="BIGINT" />
+    <result column="pro_id" property="proId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="components" property="components" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="BIGINT" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+    <result column="deadline" property="deadline" jdbcType="TIMESTAMP" />
+    <result column="actual_date" property="actualDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.fp.ssm.po.TbBom" extends="BaseResultMap" >
+    <result column="comment" property="comment" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    bom_id, pro_id, user_id, components, model, brand, price, num, url, status, created, 
+    deadline, actual_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    comment
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.fp.ssm.po.TbBomExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_bom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fp.ssm.po.TbBomExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_bom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_bom
+    where bom_id = #{bomId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_bom
+    where bom_id = #{bomId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fp.ssm.po.TbBomExample" >
+    delete from tb_bom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fp.ssm.po.TbBom" >
+    insert into tb_bom (bom_id, pro_id, user_id, 
+      components, model, brand, 
+      price, num, url, status, 
+      created, deadline, actual_date, 
+      comment)
+    values (#{bomId,jdbcType=BIGINT}, #{proId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{components,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{price,jdbcType=BIGINT}, #{num,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{created,jdbcType=TIMESTAMP}, #{deadline,jdbcType=TIMESTAMP}, #{actualDate,jdbcType=TIMESTAMP}, 
+      #{comment,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fp.ssm.po.TbBom" >
+    insert into tb_bom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bomId != null" >
+        bom_id,
+      </if>
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="components != null" >
+        components,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+      <if test="deadline != null" >
+        deadline,
+      </if>
+      <if test="actualDate != null" >
+        actual_date,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bomId != null" >
+        #{bomId,jdbcType=BIGINT},
+      </if>
+      <if test="proId != null" >
+        #{proId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="components != null" >
+        #{components,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=BIGINT},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deadline != null" >
+        #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualDate != null" >
+        #{actualDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fp.ssm.po.TbBomExample" resultType="java.lang.Integer" >
+    select count(*) from tb_bom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_bom
+    <set >
+      <if test="record.bomId != null" >
+        bom_id = #{record.bomId,jdbcType=BIGINT},
+      </if>
+      <if test="record.proId != null" >
+        pro_id = #{record.proId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.components != null" >
+        components = #{record.components,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null" >
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=BIGINT},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.created != null" >
+        created = #{record.created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deadline != null" >
+        deadline = #{record.deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.actualDate != null" >
+        actual_date = #{record.actualDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.comment != null" >
+        comment = #{record.comment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_bom
+    set bom_id = #{record.bomId,jdbcType=BIGINT},
+      pro_id = #{record.proId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      components = #{record.components,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=BIGINT},
+      num = #{record.num,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      created = #{record.created,jdbcType=TIMESTAMP},
+      deadline = #{record.deadline,jdbcType=TIMESTAMP},
+      actual_date = #{record.actualDate,jdbcType=TIMESTAMP},
+      comment = #{record.comment,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_bom
+    set bom_id = #{record.bomId,jdbcType=BIGINT},
+      pro_id = #{record.proId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      components = #{record.components,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=BIGINT},
+      num = #{record.num,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      created = #{record.created,jdbcType=TIMESTAMP},
+      deadline = #{record.deadline,jdbcType=TIMESTAMP},
+      actual_date = #{record.actualDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fp.ssm.po.TbBom" >
+    update tb_bom
+    <set >
+      <if test="proId != null" >
+        pro_id = #{proId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="components != null" >
+        components = #{components,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=BIGINT},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deadline != null" >
+        deadline = #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualDate != null" >
+        actual_date = #{actualDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where bom_id = #{bomId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fp.ssm.po.TbBom" >
+    update tb_bom
+    set pro_id = #{proId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      components = #{components,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      price = #{price,jdbcType=BIGINT},
+      num = #{num,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      deadline = #{deadline,jdbcType=TIMESTAMP},
+      actual_date = #{actualDate,jdbcType=TIMESTAMP},
+      comment = #{comment,jdbcType=LONGVARCHAR}
+    where bom_id = #{bomId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fp.ssm.po.TbBom" >
+    update tb_bom
+    set pro_id = #{proId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      components = #{components,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      price = #{price,jdbcType=BIGINT},
+      num = #{num,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP},
+      deadline = #{deadline,jdbcType=TIMESTAMP},
+      actual_date = #{actualDate,jdbcType=TIMESTAMP}
+    where bom_id = #{bomId,jdbcType=BIGINT}
+  </update>
+</mapper>
